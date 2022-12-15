@@ -1,17 +1,13 @@
-import React, { useEffect } from "react";
-import { io } from "socket.io-client";
-import { SOCKET_URL } from "./constants/constants";
-
-const socket = io(SOCKET_URL);
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import Routes from "./routes/Routes";
 
 const App = () => {
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("User connect to socket");
-    });
-  }, []);
-
-  return <div>App</div>;
+  return (
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
+  );
 };
 
 export default App;
