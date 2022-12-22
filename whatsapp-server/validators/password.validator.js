@@ -4,8 +4,9 @@
  */
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
-function isPasswordValid(password) {
-  return Boolean(passwordRegex.test(password));
-}
+// function isPasswordValid(password) {
+//   console.log(password);
+//   return Boolean(passwordRegex.test(password));
+// }
 
-module.exports = isPasswordValid;
+module.exports = { passwordRegex };

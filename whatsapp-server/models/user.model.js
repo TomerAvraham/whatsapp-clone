@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const isPasswordValid = require("../validators/password.validator");
 const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10;
 
@@ -8,10 +7,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     require: true,
-    validate: {
-      validator: isPasswordValid,
-      message: "Please Provide valid password.",
-    },
   },
   jwt_ac_token: { type: String },
   jwt_rf_token: { type: String },
@@ -33,6 +28,17 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.comparePassword = async function (plainPassword) {
   const isMatch = await bcrypt.compare(plainPassword, this.password);
   return isMatch;
+};
+
+userSchema.methods.setJwtTokens = function (accessToken, refreshToken) {
+  this.jwt_ac_token = accessToken;
+  this.jwt_rf_token = refreshToken;
+  this.save();
+};
+
+userSchema.methods.setAccessToken = function (accessToken) {
+  this.jwt_ac_token = accessToken;
+  this.save();
 };
 
 const User = model("User", userSchema);

@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/authentication.controllers");
+const catchAsyncError = require("../errors/catchAsyncError");
 
-router.post("/login", authController.login);
+router.post("/login", catchAsyncError(authController.login));
 router.post("/register");
 router.delete("/logout");
 

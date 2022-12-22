@@ -16,8 +16,7 @@ function errorHandler(error, req, res, next) {
       return res.status(400).send({ ok: false, message: "Bad request" });
 
     default:
-      res.status(500).send({ ok: false, message: "Server error" });
-      break;
+      return res.status(500).send({ ok: false, message: "Server error" });
   }
 }
 
